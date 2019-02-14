@@ -5,3 +5,6 @@ __pycache__/
 
 # Mac custom attributes file (Desktop Service Store)
 .DS_Store
+
+# idea generated files
+.idea/
