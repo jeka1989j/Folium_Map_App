@@ -1,4 +1,11 @@
 import folium
+import pandas
+
+# Reading *.xlsx file with data 
+data = pandas.read_excel('datafile/population_2.xlsx')
+lat = list(data['Latitude'])
+lon = list(data['Longitude'])
+city = list(data['region_units'])
 
 '''
 from folium import plugins -- icon upgrade 
@@ -14,8 +21,9 @@ The color of the marker. You can use:
 Starobilsk = [49.25, 38.91]
 
 map = folium.Map(location=Starobilsk, zoom_start=8, tiles='Mapbox Bright')
-folium.Marker(location=Starobilsk, popup='Starobilsk', tooltip='Starobilsk',
-              icon=folium.Icon(color='red')).add_to(map)
+for lat, lon, city in zip(lat, lon, city):
+    folium.Marker(location=[lat, lon], popup=city, tooltip=city,
+                  icon=folium.Icon(color='red')).add_to(map)
 
 # Create LayerControl
 map.add_child(folium.LayerControl())
