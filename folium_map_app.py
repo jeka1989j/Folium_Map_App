@@ -34,11 +34,18 @@ def color_icon(population):
 Starobilsk = [49.25, 38.91]
 
 map = folium.Map(location=Starobilsk, zoom_start=8, tiles='Mapbox Bright')
-for lat, lon, city, popul in zip(lat, lon, city, population):
-    folium.Marker(location=[lat, lon], popup=city,
-                  tooltip=city + ' ' + str(popul),
-                  icon=folium.Icon(color=color_icon(popul))).add_to(map)
 
+# Create FeatureGroup for poppulation of Ukraine
+fg1 = folium.FeatureGroup(name=Ukraine population)
+
+for lat, lon, city, popul in zip(lat, lon, city, population):
+    fg1.add_child(folium.Marker(location=[lat, lon], popup=city,
+                                tooltip=city + ' ' + str(popul),
+                                icon=folium.Icon(color=color_icon(popul))))
+
+
+# Add fg1 to our Map
+map.add_child(fg1)
 # Create LayerControl
 map.add_child(folium.LayerControl())
 
